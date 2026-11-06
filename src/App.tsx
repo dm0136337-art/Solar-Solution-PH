@@ -17,7 +17,11 @@ const smooth = (a: number, b: number, x: number) => {
 
 export default function App() {
   const [activeTime, setActiveTime] = useState<'morning' | 'night'>('night');
+  const [isAssessmentOpen, setIsAssessmentOpen] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const assessmentTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const assessmentCloseRef = useRef<HTMLButtonElement | null>(null);
+  const assessmentDialogRef = useRef<HTMLDivElement | null>(null);
 
   // References to keep animation loop synchronized without stale closures
   const pickRef = useRef<(n: number) => void>(() => {});
@@ -247,6 +251,50 @@ export default function App() {
     pickRef.current(1);
   }, []);
 
+  useEffect(() => {
+    if (!isAssessmentOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    assessmentCloseRef.current?.focus();
+
+    function handleDialogKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        setIsAssessmentOpen(false);
+        return;
+      }
+      if (event.key !== 'Tab' || !assessmentDialogRef.current) return;
+
+      const focusableElements = assessmentDialogRef.current.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (!firstElement || !lastElement) {
+        event.preventDefault();
+        assessmentCloseRef.current?.focus();
+        return;
+      }
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
+      }
+    }
+
+    document.addEventListener('keydown', handleDialogKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', handleDialogKeyDown);
+      assessmentTriggerRef.current?.focus();
+    };
+  }, [isAssessmentOpen]);
+
   return (
     <main className="hero">
       <div className="layer sky">
@@ -312,44 +360,21 @@ export default function App() {
       <canvas id="fog" ref={canvasRef} aria-hidden="true" />
 
       <div className="ui">
-        <header className="bar">
-          <a className="logo" href="#" aria-label="Lumen Roof">
-            <svg viewBox="0 0 40 40" aria-hidden="true">
-              <g fill="color-mix(in srgb,#6d8f2a calc((1 - var(--k))*100%),#d8ee8e)">
-                <circle cx="20" cy="20" r="0" />
-                <path id="ray" d="M18.3 3.5h3.4l.9 8.4h-5.2Z" />
-                <use href="#ray" transform="rotate(30 20 20)" />
-                <use href="#ray" transform="rotate(60 20 20)" />
-                <use href="#ray" transform="rotate(90 20 20)" />
-                <use href="#ray" transform="rotate(120 20 20)" />
-                <use href="#ray" transform="rotate(150 20 20)" />
-                <use href="#ray" transform="rotate(180 20 20)" />
-                <use href="#ray" transform="rotate(210 20 20)" />
-                <use href="#ray" transform="rotate(240 20 20)" />
-                <use href="#ray" transform="rotate(270 20 20)" />
-                <use href="#ray" transform="rotate(300 20 20)" />
-                <use href="#ray" transform="rotate(330 20 20)" />
-              </g>
-            </svg>
-            Lumen Roof
-          </a>
-          <ul className="links">
-            <li><a href="#">How It Works</a></li>
-            <li><a href="#">Our Cases</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Careers</a></li>
-            <li><a href="#">Resources</a></li>
-          </ul>
-          <div className="side">
-            <a href="#">Customers</a>
-            <a className="cta" href="#">Get an Instant Quote</a>
-          </div>
+        <header className="topbar">
+          <button
+            ref={assessmentTriggerRef}
+            className="assessment-trigger"
+            type="button"
+            onClick={() => setIsAssessmentOpen(true)}
+          >
+            Let's Estimate
+          </button>
         </header>
 
         <h1>
-          <span className="l1">$0 Electricity Bills</span>
+          <span className="l1">The Future of Power</span>
           <span>
-            <i>for the next</i> <span className="y">7 Years</span>
+            <i>is in Your Hands,</i> <span className="y"> Break Free from the Grid.</span>
           </span>
         </h1>
 
@@ -361,7 +386,7 @@ export default function App() {
               onClick={handleMorningClick}
             >
               <b>Morning</b>
-              <small>$0 for Electricity</small>
+              <small>₱ 00.00 for Electricity</small>
             </button>
             <button
               id="bn"
@@ -369,16 +394,47 @@ export default function App() {
               onClick={handleNightClick}
             >
               <b>Night</b>
-              <small>$0 for Electricity</small>
+              <small>₱00.00 for Electricity</small>
             </button>
           </div>
           <p className="cap">
-            Forget the energy market, weather conditions and seasons. Our Smart
+            Harnessing solar energy to deliver reliable, sustainable
             <br />
-            Controller guarantees you get no electricity bill for seven years.
+            and independent power beyond the grid.
           </p>
         </div>
       </div>
+
+      {isAssessmentOpen && (
+        <div
+          className="assessment-backdrop"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) setIsAssessmentOpen(false);
+          }}
+        >
+          <div
+            ref={assessmentDialogRef}
+            className="assessment-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Solar Energy Assessment"
+          >
+            <div className="assessment-header">
+              <button
+                ref={assessmentCloseRef}
+                className="assessment-close"
+                type="button"
+                aria-label="Close solar energy assessment"
+                onClick={() => setIsAssessmentOpen(false)}
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m6 6 12 12M18 6 6 18" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
