@@ -1,0 +1,6 @@
+{
+  "name": "Lumen Roof",
+  "description": "Forget the energy market, weather conditions and seasons. Our Smart Controller guarantees you get no electricity bill for seven years.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
