@@ -1,0 +1,268 @@
+.solar-assessment-page{min-height:100svh;overflow-x:hidden;overflow-y:visible;background:#f4f6f3;color:#18232d;padding:clamp(28px,5vw,64px) 20px 32px;font-family:"Instrument Sans",system-ui,sans-serif}
+body:has(.solar-assessment-page){height:auto;min-height:100%;overflow-x:hidden;overflow-y:auto}
+body:has(.solar-assessment-page) #root{height:auto;min-height:100%;overflow:visible}
+.assessment-shell{width:min(100%,1180px,calc(50% + 490px));margin-left:max(0px,calc((100% - 980px)/2));margin-right:0}
+.assessment-content-grid{display:grid;grid-template-columns:minmax(0,calc((min(100%,980px) - 20px)/3)) minmax(0,1fr);align-items:start;gap:20px}
+.calculator-header{position:relative;left:clamp(-100px,calc((980px - 100vw + 40px)/4),0px);text-align:center;margin:0 auto 34px;max-width:620px}
+.calculator-mark{display:grid;place-items:center;width:46px;height:46px;margin:0 auto 14px;border-radius:14px;background:#e5edce;color:#526b25}
+.calculator-eyebrow{font-size:11px;font-weight:700;letter-spacing:.16em;color:#FFFFFF;margin-bottom:9px}
+.calculator-header h1{margin:0;transform:none;color:#FFFFFF;font-size:clamp(30px,4vw,42px);font-weight:600;line-height:1.12;letter-spacing:-.04em}
+.calculator-intro{margin-top:12px;color:#FFFFFF;font-size:15px;line-height:1.55}
+.appliance-card{padding:clamp(20px,3vw,30px);border:1px solid #e1e6df;border-radius:18px;background:#fff;box-shadow:0 12px 36px rgba(27,42,30,.045)}
+.appliance-card-heading h2{font-size:18px;font-weight:650;letter-spacing:-.02em}
+.appliance-card-heading p{margin-top:6px;color:#78817b;font-size:13px;line-height:1.5}
+.appliance-list{display:grid;gap:12px;margin-top:22px}
+.appliance-row{padding:17px 18px 14px;border:1px solid #e8ece7;border-radius:12px;background:#fcfdfb}
+.appliance-row-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.appliance-row-top h3{color:#39443d;font-size:13px;font-weight:650}
+.remove-appliance{display:inline-flex;align-items:center;gap:6px;padding:5px 7px;border-radius:7px;color:#78817b;font-size:12px;transition:color .15s,background .15s}
+.remove-appliance:hover{background:#fff0ed;color:#a43e2b}
+.appliance-fields{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,.75fr) minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:start}
+.appliance-fields>*{min-width:0}
+.appliance-fields label{display:grid;align-content:start;gap:7px;color:#59645d;font-size:11px;font-weight:600;letter-spacing:.01em}
+.appliance-fields label span{color:#859087;font-weight:500}
+.appliance-fields input{display:block;box-sizing:border-box;width:100%;min-width:0;height:42px;margin:0;padding:0 11px;border:1px solid #dfe5dd;border-radius:7px;background:#fff;color:#18232d;font:inherit;font-size:14px;font-weight:500;outline:none;transition:border-color .15s,box-shadow .15s}
+.appliance-fields input::placeholder{color:#a4aca6;font-weight:400}
+.appliance-fields input:focus{border-color:#9bb461;box-shadow:0 0 0 3px rgba(155,180,97,.16)}
+.appliance-fields input:invalid:not(:placeholder-shown){border-color:#c75b43}
+.appliance-energy{display:flex;justify-content:space-between;align-items:center;margin-top:13px;padding-top:11px;border-top:1px solid #edf0eb;color:#7b847e;font-size:11px}
+.appliance-energy strong{color:#354235;font-size:13px;font-weight:650}
+.appliance-energy small{color:#818a83;font-size:11px;font-weight:500}
+.total-energy-result{display:flex;align-items:baseline;gap:14px;margin-top:20px;color:#445048}
+.total-energy-result>span{margin-right:auto;color:#59645d;font-size:13px;font-weight:650}
+.total-energy-result strong{color:#354235;font-size:20px;font-weight:650;white-space:nowrap}
+.total-energy-result strong:last-child{color:#526b25;font-size:24px}
+.total-energy-result small{color:#78817b;font-size:12px;font-weight:500}
+.add-appliance{display:flex;align-items:center;justify-content:center;gap:8px;width:max-content;min-height:42px;margin:100px auto 0;padding:0 14px;border:1px solid #dce5cb;border-radius:8px;background:#f8faF4;color:#526b25;font-size:13px;font-weight:650;transition:background .15s,border-color .15s}
+.add-appliance:hover{border-color:#bdcb9d;background:#f0f5e6}
+.calculator-footer{padding:20px 0 0;text-align:center;color:#8a938c;font-size:11px}
+.summary-download-button{width:100%;min-height:42px;margin-top:18px;padding:9px 12px;border:1px solid #526b25;border-radius:8px;background:#526b25;color:#fff;font:inherit;font-size:12px;font-weight:650;cursor:pointer}
+.summary-download-button:hover{background:#43591e}
+.location-summary-column{display:grid;min-width:0;gap:16px}
+.system-summary-card{padding:18px 16px!important;border-radius:14px!important}
+.system-summary-card .capacity-card-heading h2{font-size:15px}
+.system-summary-card .capacity-card-heading p{font-size:10px}
+.summary-download-button{min-height:38px;margin-top:12px;font-size:11px}
+.summary-sections{display:grid;gap:0;margin-top:11px}
+.summary-section{padding:0;border-top:1px solid #e7ece5}
+.summary-section:last-child{border-bottom:1px solid #e7ece5}
+.summary-section>summary{padding:9px 1px;color:#354a34;font-size:11px;font-weight:700;cursor:pointer;list-style-position:inside}
+.summary-section>summary:focus-visible{outline:2px solid #9bb461;outline-offset:2px}
+.summary-section dl{display:grid;gap:0;margin:0}
+.summary-section dl>div{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid #f0f2ef}
+.summary-section dt{color:#78817b;font-size:9px;line-height:1.4}
+.summary-section dd{margin:0;color:#39443d;font-size:9px;font-weight:650;text-align:right;line-height:1.4;overflow-wrap:anywhere}
+.calculator-footer span{padding:0 5px;color:#b9c4b8}
+@media(max-width:900px){.assessment-content-grid{grid-template-columns:minmax(0,1fr);gap:16px}}
+@media(max-width:680px){.solar-assessment-page{padding:28px 14px 24px}.calculator-header{margin-bottom:24px}.calculator-intro{font-size:14px}.appliance-card{padding:18px 14px}.appliance-row{padding:14px 12px 12px}.appliance-fields{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px 10px}.appliance-fields .field-name{grid-column:1/-1}.appliance-fields input{height:42px}.total-energy-result{flex-wrap:wrap;gap:8px 12px}.total-energy-result>span{flex-basis:100%}.total-energy-result strong{font-size:18px}.total-energy-result strong:last-child{font-size:22px}.add-appliance{margin-top:100px}.appliance-fields label{font-size:10px}}
+.solar-location-card{min-width:0;padding:clamp(20px,3vw,30px);border:1px solid #e1e6df;border-radius:18px;background:#fff;box-shadow:0 12px 36px rgba(27,42,30,.045)}
+.location-card-heading{display:flex;align-items:center;gap:12px}
+.location-card-icon{display:grid;flex:0 0 40px;place-items:center;width:40px;height:40px;border-radius:12px;background:#e5edce;color:#526b25}
+.location-card-heading h2{font-size:17px;font-weight:650;letter-spacing:-.025em}
+.location-card-heading p{margin-top:4px;color:#78817b;font-size:12px}
+.location-description{margin-top:15px;color:#66716c;font-size:13px;line-height:1.55}
+.location-actions{display:flex;align-items:center;gap:12px;margin-top:18px}
+.location-detect-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 13px;border:1px solid #dce5cb;border-radius:8px;background:#f8faf4;color:#526b25;font-size:12px;font-weight:650}
+.location-detect-button:disabled{opacity:.6;cursor:wait}
+.location-manual-toggle,.selected-location-heading button,.location-error button{color:#526b25;font-size:12px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.location-search-form{display:grid;gap:7px;margin-top:16px}
+.location-search-form>label{color:#59645d;font-size:11px;font-weight:600}
+.location-search-controls{display:flex;gap:8px}
+.location-search-controls input{min-width:0;flex:1;height:40px;padding:0 11px;border:1px solid #dfe5dd;border-radius:7px;background:#fff;color:#18232d;font:inherit;font-size:13px}
+.location-search-controls input:focus{outline:2px solid rgba(155,180,97,.35);border-color:#9bb461}
+.location-search-controls button{display:grid;flex:0 0 40px;place-items:center;height:40px;border-radius:7px;background:#526b25;color:#fff}
+.location-search-controls button:disabled{opacity:.5;cursor:wait}
+.location-status{margin-top:12px;color:#657642;font-size:12px;line-height:1.45}
+.location-error,.solar-data-error{display:grid;gap:8px;margin-top:12px;padding:11px 12px;border:1px solid #f0d5ce;border-radius:8px;background:#fff8f6;color:#9d4936;font-size:12px;line-height:1.45}
+.location-error button{justify-self:start}
+.selected-location{margin-top:17px;padding:13px;border:1px solid #e8ece7;border-radius:10px;background:#fcfdfb}
+.selected-location-heading{display:flex;align-items:center;gap:7px;color:#526b25}
+.selected-location-heading strong{min-width:0;flex:1;color:#354235;font-size:12px;line-height:1.4}
+.selected-location-heading button{flex:0 0 auto}
+.location-details{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;margin-top:13px}
+.location-details>div,.solar-data-meta>div{min-width:0}
+.location-details dt,.solar-data-meta span{color:#838c85;font-size:10px}
+.location-details dd{overflow-wrap:anywhere;margin-top:3px;color:#39443d;font-size:11px;font-weight:600}
+.solar-data-loading{display:flex;align-items:center;gap:8px;margin-top:17px;color:#657642;font-size:12px}
+.location-spin{animation:location-spin .9s linear infinite}
+@keyframes location-spin{to{transform:rotate(360deg)}}
+.design-psh{margin-top:18px;padding:15px;border-radius:11px;background:#182a25;color:#fff}
+.design-psh>span{display:block;color:#c0ccb9;font-size:11px}
+.design-psh>strong{display:block;margin-top:7px;color:#d7ef9a;font-size:27px;font-weight:650;letter-spacing:-.03em}
+.design-psh>strong small{font-size:12px;font-weight:500;letter-spacing:0}
+.design-psh p{margin-top:7px;color:#b2beb5;font-size:10px;line-height:1.45}
+.solar-data-meta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}
+.solar-data-meta strong{display:block;margin-top:4px;color:#39443d;font-size:12px;font-weight:650}
+.monthly-psh{margin-top:19px}
+.monthly-psh h3{color:#39443d;font-size:13px;font-weight:650}
+.monthly-chart{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:5px;height:126px;margin-top:12px;padding:8px 7px 0;border:1px solid #edf0eb;border-radius:9px;background:#fcfdfb}
+.month-column{display:flex;min-width:0;flex-direction:column;align-items:center;gap:4px}
+.month-bar-track{display:flex;align-items:flex-end;justify-content:center;width:100%;height:68px;border-bottom:1px solid #dfe5dd}
+.month-bar{display:block;width:min(100%,15px);min-height:2px;border-radius:4px 4px 0 0;background:#9ab85c}
+.month-column strong{color:#526b25;font-size:9px;font-weight:650}
+.month-column small{color:#7d877f;font-size:8px}
+.monthly-psh>p{margin-top:9px;color:#838c85;font-size:10px;line-height:1.45}
+.solar-source,.geocoder-attribution{margin-top:15px;color:#8a938c;font-size:10px;line-height:1.5}
+.solar-source a,.geocoder-attribution a{color:#526b25;text-decoration:underline;text-underline-offset:2px}
+.geocoder-attribution{margin-top:14px}
+@media(max-width:680px){.solar-location-card{padding:18px 14px}.location-details{gap:9px}.monthly-chart{gap:3px;padding-right:5px;padding-left:5px}.month-column small{font-size:7px}}
+.energy-assessment-column{display:grid;min-width:0;gap:20px}
+.capacity-card{min-width:0;padding:clamp(20px,3vw,30px);border:1px solid #e1e6df;border-radius:18px;background:#fff;box-shadow:0 12px 36px rgba(27,42,30,.045)}
+.capacity-card-heading{display:flex;align-items:center;gap:12px}
+.capacity-card-icon{display:grid;flex:0 0 40px;place-items:center;width:40px;height:40px;border-radius:12px;background:#e5edce;color:#526b25}
+.capacity-card-heading h2{font-size:17px;font-weight:650;letter-spacing:-.025em}
+.capacity-card-heading p{margin-top:4px;color:#78817b;font-size:12px}
+.capacity-input-group{display:grid;gap:8px;margin-top:18px}
+.capacity-input-group>label{color:#59645d;font-size:11px;font-weight:600}
+.capacity-input-group>input{box-sizing:border-box;width:100%;min-width:0;height:42px;padding:0 11px;border:1px solid #dfe5dd;border-radius:7px;background:#fff;color:#18232d;font:inherit;font-size:14px;font-weight:500}
+.capacity-input-group>input:focus{outline:2px solid rgba(155,180,97,.35);border-color:#9bb461}
+.panel-presets{display:flex;flex-wrap:wrap;gap:7px;margin-top:3px}
+.panel-presets button{min-height:31px;padding:0 10px;border:1px solid #dce5cb;border-radius:7px;background:#f8faf4;color:#526b25;font-size:11px;font-weight:600}
+.panel-presets button:hover,.panel-presets button.is-selected{border-color:#9bb461;background:#edf4df}
+.capacity-requirements,.capacity-hint{display:grid;gap:5px;margin-top:15px;color:#78817b;font-size:12px;line-height:1.5}
+.capacity-results{margin-top:19px;padding-top:17px;border-top:1px solid #edf0eb}
+.capacity-result-primary{padding:14px 15px;border-radius:10px;background:#182a25;color:#fff}
+.capacity-result-primary>span{display:block;color:#c0ccb9;font-size:11px}
+.capacity-result-primary>strong{display:block;margin-top:6px;color:#d7ef9a;font-size:27px;font-weight:650;letter-spacing:-.03em}
+.capacity-result-primary>strong small{font-size:13px;font-weight:500;letter-spacing:0}
+.capacity-result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px 18px;margin-top:17px}
+.capacity-result-grid>div{min-width:0}
+.capacity-result-grid>div>span{display:block;color:#838c85;font-size:10px}
+.capacity-result-grid>div>strong{display:block;margin-top:5px;color:#39443d;font-size:14px;font-weight:650;line-height:1.5;overflow-wrap:anywhere}
+.capacity-result-grid>div>strong small{color:#526b25;font-size:12px;font-weight:600}
+.capacity-result-grid>.capacity-required-result>span{color:#39443d;font-weight:700}
+.capacity-result-grid>.capacity-required-result>strong{font-weight:800}
+.capacity-assumptions{margin-top:15px;padding-top:12px;border-top:1px solid #edf0eb;color:#838c85;font-size:10px;line-height:1.5}
+.calculation-details{margin-top:16px;border-top:1px solid #edf0eb}
+.calculation-details summary{padding:14px 0 2px;color:#526b25;font-size:12px;font-weight:650;cursor:pointer}
+.calculation-details summary:focus-visible{outline:2px solid #9bb461;outline-offset:3px;border-radius:3px}
+.calculation-steps{display:grid;gap:12px;margin-top:13px}
+.calculation-steps section{padding:12px;border:1px solid #edf0eb;border-radius:9px;background:#fcfdfb}
+.calculation-steps h3{margin-bottom:8px;color:#39443d;font-size:11px;font-weight:650}
+.calculation-steps p{margin-top:5px;color:#66716c;font-size:11px;line-height:1.5;overflow-wrap:anywhere}
+.calculation-steps .calculation-formula{color:#526b25;font-weight:600}
+.inverter-assumption{margin-top:15px;color:#66716c;font-size:11px;line-height:1.5}
+.inverter-card .capacity-results{margin-top:15px}
+.inverter-result-grid{margin-top:0}
+.inverter-considerations{display:grid;gap:7px;margin-top:16px;padding-top:12px;border-top:1px solid #edf0eb;color:#838c85;font-size:10px;line-height:1.5}
+.battery-inputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
+.battery-inputs label{display:grid;min-width:0;gap:7px;color:#59645d;font-size:11px;font-weight:600}
+.battery-inputs select,.battery-inputs input{box-sizing:border-box;width:100%;min-width:0;height:42px;padding:0 11px;border:1px solid #dfe5dd;border-radius:7px;background:#fff;color:#18232d;font:inherit;font-size:13px;font-weight:500}
+.battery-inputs select:focus,.battery-inputs input:focus{outline:2px solid rgba(155,180,97,.35);border-color:#9bb461}
+.battery-card .battery-result-grid{margin-top:0}
+.battery-result-grid>.battery-required-result>span{color:#39443d;font-size:11px;font-weight:700}
+.battery-result-grid>.battery-required-result>strong{color:#526b25;font-size:19px;font-weight:750;line-height:1.35}
+.battery-result-grid>.battery-required-result>strong small{font-size:13px}
+.battery-considerations{display:grid;gap:7px;margin-top:16px;padding-top:12px;border-top:1px solid #edf0eb;color:#838c85;font-size:10px;line-height:1.5}
+@media(max-width:680px){.capacity-card{padding:18px 14px}.capacity-result-grid{gap:13px 12px}.capacity-result-primary>strong{font-size:25px}.battery-inputs{gap:10px}}
+
+/* Device Base Assessment dashboard refinements */
+.solar-assessment-page .calculator-mark,.solar-assessment-page .capacity-card-icon,.solar-assessment-page .location-card-icon{display:none}
+.solar-assessment-page{min-height:100svh;padding:clamp(28px,4vw,52px) clamp(16px,3vw,40px) 36px;background:#0b1426 url("https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261102_040415_2ab95096-8c39-449f-b36c-17c2813815a4.png&w=2560&q=85") center 62%/cover fixed}
+.assessment-shell{width:min(100%,1440px);margin:0 auto}
+.assessment-content-grid{grid-template-columns:minmax(290px,.78fr) minmax(0,1.7fr);gap:24px}
+.energy-assessment-column{gap:18px}
+.calculator-header{left:auto;margin-bottom:30px;max-width:680px}
+.calculator-mark{width:44px;height:44px;margin-bottom:12px;border-radius:13px}
+.calculator-eyebrow{margin-bottom:8px;font-size:10px}
+.calculator-header h1{font-size:clamp(30px,3.2vw,40px);letter-spacing:-.035em}
+.calculator-intro{margin-top:10px;font-size:14px}
+.appliance-card,.solar-location-card,.capacity-card{padding:clamp(20px,2vw,28px);border:1px solid rgba(255,255,255,.34);border-radius:16px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 8px 24px rgba(4,12,22,.08)}
+.appliance-card-heading h2,.location-card-heading h2,.capacity-card-heading h2{font-size:17px;line-height:1.3;font-weight:700;letter-spacing:-.02em;color:#25342c}
+.appliance-card-heading p,.location-card-heading p,.capacity-card-heading p{margin-top:5px;color:#748078;font-size:12px;line-height:1.5}
+.capacity-card-heading,.location-card-heading{gap:11px}
+.capacity-card-icon,.location-card-icon{flex-basis:38px;width:38px;height:38px;border-radius:11px}
+.appliance-list{gap:10px;margin-top:18px}
+.appliance-row,.selected-location{border-color:#e6ece5;border-radius:10px;background:#fbfcfa}
+.appliance-row{padding:15px 15px 13px}
+.appliance-row-top{margin-bottom:12px}
+.appliance-fields{gap:10px}
+.appliance-fields label,.battery-inputs label{gap:6px;color:#536057;font-size:11px;font-weight:650}
+.appliance-fields input,.battery-inputs select,.battery-inputs input,.location-search-controls input,.capacity-input-group>input{height:42px;border-color:#d8e1d8;border-radius:8px;background:#fff;font-size:13px}
+.appliance-fields input:focus,.battery-inputs select:focus,.battery-inputs input:focus,.location-search-controls input:focus,.capacity-input-group>input:focus{outline:3px solid rgba(155,180,97,.2);border-color:#88a64d}
+.total-energy-result{gap:12px;margin-top:19px;padding:14px 15px;border:1px solid #e7eddf;border-radius:10px;background:#f8faf4}
+.total-energy-result>span{color:#536057;font-size:12px}
+.total-energy-result strong{font-size:18px}
+.total-energy-result strong:last-child{font-size:21px}
+.add-appliance{min-height:40px;margin:18px auto 0;border-radius:8px;font-size:12px}
+.capacity-input-group{gap:7px;margin-top:17px}
+.capacity-input-group>label,.location-search-form>label{color:#536057;font-size:11px;font-weight:650}
+.panel-presets{gap:6px}
+.panel-presets button{min-height:32px;padding:0 11px;border-radius:7px;font-size:11px}
+.capacity-results{margin-top:17px;padding-top:15px}
+.capacity-result-grid{gap:16px 20px;margin-top:15px}
+.capacity-result-grid>div>span{color:#77837a;font-size:10px;line-height:1.4}
+.capacity-result-grid>div>strong{margin-top:5px;color:#2d3b32;font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
+.capacity-result-grid>.capacity-required-result{padding:11px 12px;border:1px solid #e6edda;border-radius:9px;background:#f8faf3}
+.capacity-result-grid>.capacity-required-result>span{font-size:10px}
+.capacity-result-grid>.capacity-required-result>strong{font-size:17px}
+.capacity-assumptions,.inverter-assumption,.inverter-considerations,.battery-considerations{font-size:10px;line-height:1.55}
+.inverter-result-grid,.battery-card .battery-result-grid{margin-top:0}
+.battery-inputs{gap:11px}
+.battery-result-grid>.battery-required-result{padding:11px 12px;border:1px solid #e6edda;border-radius:9px;background:#f8faf3}
+.battery-result-grid>.battery-required-result>span{font-size:10px}
+.battery-result-grid>.battery-required-result>strong{font-size:17px}
+.calculation-details{margin-top:14px;border-top-color:#e7ece5}
+.calculation-details summary{padding:12px 0 2px;font-size:11px}
+.calculation-steps{gap:9px;margin-top:11px}
+.calculation-steps section{padding:11px;border-color:#e7ece5;border-radius:8px;background:#fbfcfa}
+.calculation-steps h3{margin-bottom:7px;font-size:11px}
+.calculation-steps p{font-size:10px;line-height:1.55;font-variant-numeric:tabular-nums}
+.location-description{margin-top:13px;font-size:12px;line-height:1.6}
+.location-actions{flex-wrap:wrap;gap:10px;margin-top:16px}
+.location-detect-button{min-height:40px;border-radius:8px;font-size:11px}
+.location-manual-toggle,.selected-location-heading button,.location-error button{font-size:11px}
+.location-search-form{gap:7px;margin-top:14px}
+.location-status,.location-error,.solar-data-error{font-size:11px}
+.selected-location{padding:12px}
+.location-details{gap:9px 11px}
+.location-details dt,.solar-data-meta span{font-size:9px}
+.location-details dd{font-size:10px}
+.design-psh{margin-top:15px;padding:14px;border-radius:10px}
+.design-psh>strong{font-size:25px}
+.solar-data-meta{gap:11px;margin-top:13px}
+.solar-data-meta strong{font-size:11px}
+.monthly-psh{margin-top:17px}
+.monthly-chart{gap:4px;height:120px;margin-top:10px;border-radius:8px}
+.month-bar-track{height:64px}
+.monthly-psh>p,.solar-source,.geocoder-attribution{font-size:9px;line-height:1.55}
+.calculator-footer{padding-top:24px}
+
+@media(max-width:1000px){
+  .assessment-content-grid{grid-template-columns:minmax(260px,.85fr) minmax(0,1.4fr);gap:16px}
+  .appliance-fields{grid-template-columns:minmax(0,1.6fr) minmax(0,.7fr) minmax(0,1fr) minmax(0,1fr);gap:8px}
+  .appliance-fields label{font-size:10px}
+}
+@media(max-width:820px){
+  .assessment-content-grid{grid-template-columns:minmax(0,1fr);gap:16px}
+  .solar-location-card{order:0}
+  .energy-assessment-column{order:1;gap:16px}
+  .calculator-header{margin-bottom:24px}
+  .location-description{max-width:760px}
+  .monthly-chart{height:130px}
+  .month-bar-track{height:72px}
+}
+@media(max-width:680px){
+  .solar-assessment-page{padding:24px 14px 24px}
+  .calculator-header{margin-bottom:20px}
+  .calculator-mark{width:40px;height:40px;margin-bottom:10px}
+  .calculator-header h1{font-size:clamp(28px,8vw,36px)}
+  .calculator-intro{font-size:13px}
+  .appliance-card,.solar-location-card,.capacity-card{padding:18px 14px;border-radius:14px}
+  .appliance-fields{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:11px 9px}
+  .appliance-fields .field-name{grid-column:1/-1}
+  .appliance-fields label{font-size:10px}
+  .appliance-row{padding:13px 11px 11px}
+  .total-energy-result{flex-wrap:wrap;gap:8px 10px;padding:12px}
+  .total-energy-result>span{flex-basis:100%}
+  .total-energy-result strong{font-size:16px}
+  .total-energy-result strong:last-child{font-size:19px}
+  .add-appliance{margin-top:16px}
+  .capacity-result-grid{gap:13px 12px}
+  .battery-inputs{grid-template-columns:minmax(0,1fr)}
+  .location-actions{align-items:flex-start}
+  .location-details{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .monthly-chart{gap:3px;padding-right:5px;padding-left:5px}
+  .month-column small{font-size:7px}
+  .calculator-footer{padding-top:20px}
+}

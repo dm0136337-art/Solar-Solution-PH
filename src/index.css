@@ -27,13 +27,14 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .assessment-trigger{max-width:100%;min-height:calc(48*var(--u));padding:calc(12*var(--u)) calc(24*var(--u));border:1px solid rgba(255,255,255,.38);border-radius:999px;background:rgba(246,248,243,.76);color:#18232d;font-size:calc(15*var(--u));font-weight:600;letter-spacing:.005em;line-height:1.25;box-shadow:0 8px 28px rgba(4,12,22,.14);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);transition:transform .2s ease,background .2s ease,box-shadow .2s ease}
 .assessment-trigger:hover{transform:translateY(-2px);background:rgba(255,255,255,.9);box-shadow:0 12px 32px rgba(4,12,22,.2)}
 .assessment-trigger:focus-visible,.assessment-close:focus-visible{outline:3px solid #d7ed91;outline-offset:4px}
-.assessment-backdrop{position:fixed;inset:0;z-index:10;display:grid;place-items:center;padding:24px;background:transparent;pointer-events:auto}
-.assessment-dialog{position:relative;display:flex;flex-direction:column;width:min(100%,760px);height:min(88svh,760px);max-height:min(88svh,760px);overflow-y:auto;overscroll-behavior:contain;padding:26px;border:1px solid rgba(255,255,255,.42);border-radius:28px;background:rgba(18,30,46,.78);color:#f7f8f5;box-shadow:0 24px 72px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.38);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);pointer-events:auto;animation:assessment-card-in .3s cubic-bezier(.2,.8,.2,1) both}
-.assessment-header{position:sticky;top:-26px;z-index:2;display:flex;min-height:60px;align-items:center;justify-content:center;margin:-26px -26px 20px;padding:12px 64px;border-bottom:1px solid rgba(255,255,255,.15);background:rgba(18,30,46,.94);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
-.assessment-close{position:absolute;top:50%;right:16px;display:grid;width:38px;height:38px;place-items:center;transform:translateY(-50%);border:1px solid rgba(255,255,255,.5);border-radius:50%;background:rgba(255,255,255,.12);color:#fff;cursor:pointer;transition:background .2s ease,transform .2s ease}
-.assessment-close:hover{transform:translateY(-50%) scale(1.06);background:rgba(255,255,255,.28)}
+.assessment-backdrop{position:fixed;inset:0;z-index:10;display:grid;place-items:center;padding:24px;background:rgba(5,12,22,.48);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);pointer-events:none;opacity:0;visibility:hidden;transition:opacity .2s ease,visibility .2s ease}
+.assessment-backdrop.is-open{pointer-events:auto;opacity:1;visibility:visible}
+.assessment-dialog{position:relative;width:min(100%,560px);overflow:visible;overscroll-behavior:contain;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;pointer-events:auto;animation:assessment-modal-in .24s ease both}
+.assessment-close{position:absolute;top:10px;right:10px;z-index:2;display:grid;width:38px;height:38px;place-items:center;border:1px solid rgba(20,32,47,.14);border-radius:50%;background:rgba(255,255,255,.92);color:#18232d;cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,.12);transition:background .2s ease,transform .2s ease}
+.assessment-close:hover{transform:scale(1.06);background:#fff}
 .assessment-close svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
-@keyframes assessment-card-in{from{opacity:0;transform:scale(.96) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.assessment-form{display:block;flex:none;width:100%;max-width:100%;height:715px;min-height:0;border:0;border-radius:0;background:transparent}
+@keyframes assessment-modal-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 h1{margin-top:calc(58*var(--u));transform:translateY(100px);text-align:center;font-size:calc(64*var(--u));line-height:1.09;font-weight:500;letter-spacing:-.022em;color:var(--ink)}
 h1 span{display:block}
 h1 .l1,h1 .y{opacity:calc(1 - var(--dip)*.8)}
@@ -61,12 +62,15 @@ h1 .y{display:inline}
   .toggle b{font-size:19px}.toggle small{font-size:13px}
   .cap{font-size:14px;max-width:360px}
   .cap br{display:none}
-  .assessment-backdrop{padding:14px}
-  .assessment-dialog{width:100%;height:calc(100svh - 28px);max-height:calc(100svh - 28px);padding:18px;border-radius:24px}
-  .assessment-header{top:-18px;min-height:54px;margin:-18px -18px 16px;padding:10px 58px}
-  .assessment-close{right:12px;width:36px;height:36px}
+  .assessment-backdrop{padding:8px}
+  .assessment-dialog{width:100%;max-height:calc(100svh - 16px);overflow-y:auto}
+  .assessment-close{top:8px;right:8px;width:36px;height:36px}
+}
+@media (min-width:821px) and (max-height:763px){
+  .assessment-dialog{max-height:calc(100svh - 48px);overflow-y:auto}
 }
 @media (prefers-reduced-motion:reduce){
   .assessment-dialog{animation:none}
+  .assessment-backdrop{transition:none}
   .assessment-trigger,.assessment-close{transition:none}
 }

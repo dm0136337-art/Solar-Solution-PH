@@ -18,6 +18,7 @@ const smooth = (a: number, b: number, x: number) => {
 export default function App() {
   const [activeTime, setActiveTime] = useState<'morning' | 'night'>('night');
   const [isAssessmentOpen, setIsAssessmentOpen] = useState(false);
+  const [isFormEmbedReady, setIsFormEmbedReady] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const assessmentTriggerRef = useRef<HTMLButtonElement | null>(null);
   const assessmentCloseRef = useRef<HTMLButtonElement | null>(null);
@@ -25,6 +26,38 @@ export default function App() {
 
   // References to keep animation loop synchronized without stale closures
   const pickRef = useRef<(n: number) => void>(() => {});
+
+  useEffect(() => {
+    const embedScriptUrl = 'https://link.msgsndr.com/js/form_embed.js';
+    const existingScript = Array.from(document.scripts).find(
+      (script) => script.src === embedScriptUrl,
+    );
+
+    if (existingScript?.dataset.loaded === 'true') {
+      setIsFormEmbedReady(true);
+      return;
+    }
+
+    const embedScript = existingScript ?? document.createElement('script');
+    const markReady = () => {
+      embedScript.dataset.loaded = 'true';
+      setIsFormEmbedReady(true);
+    };
+
+    embedScript.addEventListener('load', markReady, { once: true });
+    embedScript.addEventListener('error', markReady, { once: true });
+    if (!existingScript) {
+      embedScript.src = embedScriptUrl;
+      embedScript.async = true;
+      embedScript.dataset.gohighlevelFormEmbed = 'true';
+      document.body.appendChild(embedScript);
+    }
+
+    return () => {
+      embedScript.removeEventListener('load', markReady);
+      embedScript.removeEventListener('error', markReady);
+    };
+  }, []);
 
   useEffect(() => {
     const root = document.documentElement.style;
@@ -405,36 +438,50 @@ export default function App() {
         </div>
       </div>
 
-      {isAssessmentOpen && (
+      <div
+        className={`assessment-backdrop${isAssessmentOpen ? ' is-open' : ''}`}
+        aria-hidden={!isAssessmentOpen}
+      >
         <div
-          className="assessment-backdrop"
-          onClick={(event) => {
-            if (event.target === event.currentTarget) setIsAssessmentOpen(false);
-          }}
+          ref={assessmentDialogRef}
+          className="assessment-dialog"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Solar Energy Assessment"
+          aria-hidden={!isAssessmentOpen}
+          inert={!isAssessmentOpen}
         >
-          <div
-            ref={assessmentDialogRef}
-            className="assessment-dialog"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Solar Energy Assessment"
+          <button
+            ref={assessmentCloseRef}
+            className="assessment-close"
+            type="button"
+            aria-label="Close solar energy assessment"
+            onClick={() => setIsAssessmentOpen(false)}
+            tabIndex={isAssessmentOpen ? 0 : -1}
           >
-            <div className="assessment-header">
-              <button
-                ref={assessmentCloseRef}
-                className="assessment-close"
-                type="button"
-                aria-label="Close solar energy assessment"
-                onClick={() => setIsAssessmentOpen(false)}
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="m6 6 12 12M18 6 6 18" />
-                </svg>
-              </button>
-            </div>
-          </div>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m6 6 12 12M18 6 6 18" />
+            </svg>
+          </button>
+          {isFormEmbedReady && <iframe
+              src="https://api.leadconnectorhq.com/widget/form/gNbTs5kYSJLbqJ2W9qpa"
+              id="form-gNbTs5kYSJLbqJ2W9qpa"
+              title="Solar Solution PH - Let's Estimate Form"
+              data-layout="{'id':'INLINE'}"
+              data-trigger-type="alwaysShow"
+              data-activation-type="alwaysActivated"
+              data-deactivation-type="neverDeactivate"
+              data-form-name="Form 0"
+              data-form-id="gNbTs5kYSJLbqJ2W9qpa"
+              data-height="715"
+              data-layout-iframe-id="inline-gNbTs5kYSJLbqJ2W9qpa"
+              data-cookie-consent="true"
+              data-cookie-consent-provider="auto"
+              className="assessment-form"
+              style={{ display: 'block', width: '100%', height: 715, border: 0 }}
+          />}
         </div>
-      )}
+      </div>
     </main>
   );
 }
